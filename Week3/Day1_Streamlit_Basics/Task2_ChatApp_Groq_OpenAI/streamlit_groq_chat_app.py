@@ -21,12 +21,14 @@ def init_session():
 
 def get_client():
     if st.session_state.client is None:
-        api_key = os.getenv("GROQ_API_KEY")  # ✅ Read from .env
+        api_key = os.getenv("GROQ_API_KEY")
         if not api_key:
-            st.error("⚠ GROQ_API_KEY not set in .env file")
+            st.error("⚠ GROQ_API_KEY not set in environment")
             return None
+        # ✅ Correct constructor
         st.session_state.client = Groq(api_key=api_key)
     return st.session_state.client
+
 
 
 def append_message(role: str, content: str):
@@ -116,3 +118,5 @@ if user_input:
 
 st.sidebar.markdown("---")
 st.sidebar.caption("Built with Streamlit and Groq SDK")
+
+
